@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Latitude and Longitude</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #weatherResult {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Get Latitude and Longitude</h1>
+        <input type="text" id="city" placeholder="Enter city name">
+        <button id="getCoordinates">Get Coordinates and Weather</button>
+        <div id="lati"></div>
+        <div id="long"></div>
+        <div id="weatherResult"></div>
+    </div>
+
+    <!-- <script>
+        document.getElementById('getCoordinates').addEventListener('click', () => {
+            const city = document.getElementById('city').value;
+            const latitudeElement = document.getElementById('lati');
+            const longitudeElement = document.getElementById('long');
+            const weatherResult = document.getElementById('weatherResult');
+            let location = `https://nominatim.openstreetmap.org/search?city=${city}&format=json&addressdetails=1`
+            fetch(location).then((response)=>{
+                return response.json()
+            }).then((data)=>{
+      let latitude = data[0].lat;
+      let longitude = data[0].lon;
+      latitudeElement.textContent = latitude;
+      longitudeElement.textContent = longitude;
+
+      let weather = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
+            fetch(weather).then((response)=>{
+                return response.json()
+            }).then((data)=>{
+                console.log(data)
+                weatherResult.innerHTML = `
+                <h2>Weather in ${city}</h2>
+                <p>Time: ${data.current_weather.time}</p>
+                <p>Temperature: ${data.current_weather.temperature} °C</p>
+                <p>Wind Speed: ${data.current_weather.winddirection} km/h</p>
+                <p>Wind Speed: ${data.current_weather.windspeed} km/h</p>
+                `
+            })
+            })
+        })
+    </script> -->
+
+
+    <script>
+    //     document.getElementById('getCoordinates').addEventListener('click', () => {
+    //         const city = document.getElementById('city').value;
+    //         const latitudeElement = document.getElementById('lati');
+    //         const longitudeElement = document.getElementById('long');
+    //         const weatherResult = document.getElementById('weatherResult');
+
+    //   let weather = `http://api.weatherapi.com/v1/current.json?key=6435d1da99c9492998b114430241010&q=${city}`
+    //         fetch(weather).then((response)=>{
+    //             return response.json()
+    //         }).then((data)=>{
+    //             console.log(data)
+    //             weatherResult.innerHTML = `
+    //             <h2>Weather in ${city}</h2>
+    //             <p>Time: ${data.current.last_updated}</p>
+    //             <p>Humidity: ${data.current.humidity}</p>
+    //             <p>Tempreture: ${data.current.temp_c}</p>
+    //             <p>Wind Speed: ${data.current.wind_kph}</p>
+    //             <p>Wind Direction: ${data.current.wind_dir}</p>
+    //             `
+    //         })
+    //         })
+    document.getElementById('getCoordinates').addEventListener('click', () => {
+  const city = document.getElementById('city').value;
+  const latitudeElement = document.getElementById('lati');
+  const longitudeElement = document.getElementById('long');
+  const weatherResult = document.getElementById('weatherResult');
+
+  let weather = `http://api.weatherapi.com/v1/current.json?key=6435d1da99c9492998b114430241010&q=${city}`
+  fetch(weather)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      weatherResult.innerHTML = `
+        <h2>Weather in ${city}</h2>
+        <p>Time: ${data.current.last_updated}</p>
+        <p>Humidity: ${data.current.humidity}</p>
+        <p>Temperature: ${data.current.temp_c}</p>
+        <p>Wind Speed: ${data.current.wind_kph}</p>
+        <p>Wind Direction: ${data.current.wind_dir}</p>
+      `;
+    })
+    .catch((error) => {
+      weatherResult.innerHTML = `<p style="color:red;font-weight:600;">Error: Please Enter Valide City Name</p>`;
+    });
+});
+    </Script>
+</body>
+</html>

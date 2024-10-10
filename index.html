@@ -66,7 +66,7 @@
   const longitudeElement = document.getElementById('long');
   const weatherResult = document.getElementById('weatherResult');
 
-  let weather = `http://api.weatherapi.com/v1/current.json?key=6435d1da99c9492998b114430241010&q=${city}`
+  let weather = `https://cors-anywhere.herokuapp.com/http://api.weatherapi.com/v1/current.json?key=6435d1da99c9492998b114430241010&q=${city}`
   fetch(weather)
     .then((response) => {
       if (!response.ok) {

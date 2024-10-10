@@ -60,62 +60,6 @@
         <div id="long"></div>
         <div id="weatherResult"></div>
     </div>
-
-    <!-- <script>
-        document.getElementById('getCoordinates').addEventListener('click', () => {
-            const city = document.getElementById('city').value;
-            const latitudeElement = document.getElementById('lati');
-            const longitudeElement = document.getElementById('long');
-            const weatherResult = document.getElementById('weatherResult');
-            let location = `https://nominatim.openstreetmap.org/search?city=${city}&format=json&addressdetails=1`
-            fetch(location).then((response)=>{
-                return response.json()
-            }).then((data)=>{
-      let latitude = data[0].lat;
-      let longitude = data[0].lon;
-      latitudeElement.textContent = latitude;
-      longitudeElement.textContent = longitude;
-
-      let weather = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
-            fetch(weather).then((response)=>{
-                return response.json()
-            }).then((data)=>{
-                console.log(data)
-                weatherResult.innerHTML = `
-                <h2>Weather in ${city}</h2>
-                <p>Time: ${data.current_weather.time}</p>
-                <p>Temperature: ${data.current_weather.temperature} °C</p>
-                <p>Wind Speed: ${data.current_weather.winddirection} km/h</p>
-                <p>Wind Speed: ${data.current_weather.windspeed} km/h</p>
-                `
-            })
-            })
-        })
-    </script> -->
-
-
-    <script>
-    //     document.getElementById('getCoordinates').addEventListener('click', () => {
-    //         const city = document.getElementById('city').value;
-    //         const latitudeElement = document.getElementById('lati');
-    //         const longitudeElement = document.getElementById('long');
-    //         const weatherResult = document.getElementById('weatherResult');
-
-    //   let weather = `http://api.weatherapi.com/v1/current.json?key=6435d1da99c9492998b114430241010&q=${city}`
-    //         fetch(weather).then((response)=>{
-    //             return response.json()
-    //         }).then((data)=>{
-    //             console.log(data)
-    //             weatherResult.innerHTML = `
-    //             <h2>Weather in ${city}</h2>
-    //             <p>Time: ${data.current.last_updated}</p>
-    //             <p>Humidity: ${data.current.humidity}</p>
-    //             <p>Tempreture: ${data.current.temp_c}</p>
-    //             <p>Wind Speed: ${data.current.wind_kph}</p>
-    //             <p>Wind Direction: ${data.current.wind_dir}</p>
-    //             `
-    //         })
-    //         })
     document.getElementById('getCoordinates').addEventListener('click', () => {
   const city = document.getElementById('city').value;
   const latitudeElement = document.getElementById('lati');
